@@ -4,7 +4,7 @@
   "description": "A regular expression that matches Bible verse references and ranges",
   "main": "index.js",
   "scripts": {
-    "test": "tape test/*.js"
+    "test": "tape test.js"
   },
   "repository": {
     "type": "git",
