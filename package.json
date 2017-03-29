@@ -22,5 +22,12 @@
   "bugs": {
     "url": "https://github.com/TehShrike/verse-reference-regex/issues"
   },
-  "homepage": "https://github.com/TehShrike/verse-reference-regex#readme"
+  "homepage": "https://github.com/TehShrike/verse-reference-regex#readme",
+  "devDependencies": {
+    "compose-regexp": "0.1.8",
+    "tape": "4.6.3"
+  },
+  "dependencies": {
+    "flatmap": "0.0.3"
+  }
 }
