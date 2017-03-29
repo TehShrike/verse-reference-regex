@@ -1,0 +1,26 @@
+{
+  "name": "verse-reference-regex",
+  "version": "1.0.0",
+  "description": "A regular expression that matches Bible verse references and ranges",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TehShrike/verse-reference-regex.git"
+  },
+  "keywords": [
+    "bible",
+    "reference",
+    "verse",
+    "regex",
+    "range"
+  ],
+  "author": "TehShrike",
+  "license": "WTFPL",
+  "bugs": {
+    "url": "https://github.com/TehShrike/verse-reference-regex/issues"
+  },
+  "homepage": "https://github.com/TehShrike/verse-reference-regex#readme"
+}
