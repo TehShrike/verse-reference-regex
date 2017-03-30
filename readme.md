@@ -22,16 +22,16 @@ Given a result array, like the ones returned by [`exec`](https://developer.mozil
 
 ```json
 {
-	book: 'Genesis',
-	start: {
-		chapter: 2,
-		verse: null,
-		section: null
+	"book": "Genesis",
+	"start": {
+		"chapter": 2,
+		"verse": null,
+		"section": null
 	},
-	end: {
-		chapter: 3,
-		verse: null,
-		section: null
+	"end": {
+		"chapter": 3,
+		"verse": null,
+		"section": null
 	}
 }
 ```
