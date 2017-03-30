@@ -17,7 +17,7 @@ module.exports = [
 	{ name: 'Nehemiah', aliases: [ 'Neh' ] },
 	{ name: 'Esther', aliases: [ 'Esth', 'Est' ] },
 	{ name: 'Job', aliases: [ ] },
-	{ name: 'Psalms', aliases: [ 'Ps' ] },
+	{ name: 'Psalms', aliases: [ 'Ps', 'Psalm' ] },
 	{ name: 'Proverbs', aliases: [ 'Prov', 'Pro' ] },
 	{ name: 'Ecclesiastes', aliases: [ 'Eccl', 'Ecc' ] },
 	{ name: 'Song of Solomon', aliases: [ 'Song', 'Song of Songs' ] },
