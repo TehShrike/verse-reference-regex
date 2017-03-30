@@ -5,7 +5,7 @@
   "main": "index.js",
   "module": "index.es6.js",
   "scripts": {
-    "test": "tape test.js"
+    "test": "tape test.js && jsmd readme.md"
   },
   "repository": {
     "type": "git",
@@ -16,6 +16,8 @@
     "reference",
     "verse",
     "regex",
+    "regular",
+    "expression",
     "range"
   ],
   "author": "TehShrike",
@@ -25,10 +27,11 @@
   },
   "homepage": "https://github.com/TehShrike/verse-reference-regex#readme",
   "devDependencies": {
-    "compose-regexp": "0.1.8",
+    "jsmd": "0.3.1",
     "tape": "4.6.3"
   },
   "dependencies": {
+    "compose-regexp": "0.1.8",
     "flatmap": "0.0.3"
   }
 }
