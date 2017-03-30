@@ -41,6 +41,8 @@ Given a result array, like the ones returned by [`exec`](https://developer.mozil
 const { createRegex, extractRangeFromMatch } = require('./')
 -->
 
+Setup for the examples:
+
 ```js
 function rangeString(range) {
 	const { start, end } = range
