@@ -1,7 +1,5 @@
 const test = require('tape')
-const createRegex = require('./')
-
-const extractRangeFromMatch = require('./extract-range-from-match')
+const { createRegex, extractRangeFromMatch } = require('./')
 
 function r(book, start, end = null) {
 	return {

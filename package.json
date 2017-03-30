@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "A regular expression that matches Bible verse references and ranges",
   "main": "index.js",
+  "module": "index.es6.js",
   "scripts": {
     "test": "tape test.js"
   },
