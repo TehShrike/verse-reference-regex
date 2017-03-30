@@ -7,7 +7,7 @@ Provides:
 
 # API
 
-## `createRegex({ requireVerse = false, flags = 'i')`
+## `createRegex({ requireVerse = false, flags = 'i' })`
 
 `createRegex` takes in a map of options and returns a regular expression.
 
