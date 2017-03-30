@@ -58,24 +58,32 @@ const match = `I'm talking about Prov 30:2-3 yo`.match(verseRequiringRegex)
 
 rangeString(extractRangeFromMatch(match)) // => `Proverbs c30v2s'null' to c30v3s'null'`
 
-const match2 = `I'm not talking about Proverbs 30 at all, yo!`.match(verseRequiringRegex)
+const match2 = `I'm not talking about Proverbs 30-31 at all, yo!`.match(verseRequiringRegex)
 
 match2 // => null
+```
+
+A verse reference with no range:
+
+```js
+const match3 = `Psalm 119:120b - I am afraid of Your judgments`.match(verseRequiringRegex)
+
+rangeString(extractRangeFromMatch(match3)) // => `Psalms c119v120s'b' to c119v120s'b'`
 ```
 
 Matching verse sections identified by letters:
 
 ```js
-const match3 = verseRequiringRegex.exec(`Proverbs 30:2a-b really speaks to me`)
+const match4 = verseRequiringRegex.exec(`Proverbs 30:2a-b really speaks to me`)
 
-rangeString(extractRangeFromMatch(match3)) // => `Proverbs c30v2s'a' to c30v2s'b'`
+rangeString(extractRangeFromMatch(match4)) // => `Proverbs c30v2s'a' to c30v2s'b'`
 ```
 
 Matching ranges with only chapters, no verse numbers:
 
 ```js
-const match4 = createRegex().exec(`Doesn't require a verse to find the range Prov. 30-31`)
-const range = extractRangeFromMatch(match4)
+const match5 = createRegex().exec(`Doesn't require a verse to find the range Prov. 30-31`)
+const range = extractRangeFromMatch(match5)
 
 range.book // => 'Proverbs'
 range.start.chapter // => 30
