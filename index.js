@@ -11,12 +11,11 @@ function optional(...args) {
     return greedy('?', ...args)
 }
 
-const defaultBooks = require('./books')
+const books = require('./books')
 
 module.exports = function createRegex({
 	requireVerse = false,
 	flags: regexFlags = 'i',
-	books = defaultBooks
 }) {
 
 	const bookNames = books.map(({ name }) => name)
