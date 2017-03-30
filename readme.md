@@ -109,6 +109,8 @@ Book aliases (including ones with trailing periods) will be matched and normaliz
 
 # Other
 
+Chapter/verse numbers and ranges are not validated.
+
 If you find a verse range that you think should be matched but is not, add it to the list in [test.js](./test.js) and open a pull request.
 
 Any changes to the book aliases will be published as minor/feature version bumps.
