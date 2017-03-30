@@ -29,7 +29,7 @@ const hasReferenceWithVerse = [
 	{ text: `Test the Romans 44:559 out`, range: r('Romans', v(44, 559)) },
 	{ text: `Low in \nthe philippians 366:4 he lay`, range: r('Philippians', v(366, 4)) },
 	{ text: `An abbreviation is Ps 13:4 y'know`, range: r('Psalms', v(13, 4)) },
-	{ text: `Another abbreviation is Ps. 44:8`, range: r('Psalms', v(13, 4)) },
+	{ text: `Another abbreviation is Ps. 44:8`, range: r('Psalms', v(44, 8)) },
 	{ text: `Verse section: 1 sam 12:4b`, range: r('1 Samuel', v(12, 4, 'b')) },
 ]
 
@@ -105,23 +105,23 @@ function runAllTests(description, testCaseTester) {
 runAllTests('Matches', ({ t, expected, regex, cases }) => {
 	const expectation = expected ? 'Should' : 'Should not'
 	cases.forEach(({ text }) => {
-		t.equal(regex.test(text), expected, `${expectation} match ${text}`)
+		t.equal(regex.test(text), expected, `${expectation} match '${text}'`)
 	})
 })
 
-// runAllTests('Capturing', ({ t, expected, regex, cases, options }) => {
-// 	cases.forEach(({ text, range }) => {
-// 		const match = text.match(regex)
+runAllTests('Capturing', ({ t, expected, regex, cases }) => {
+	cases.forEach(({ text, range }) => {
+		const match = text.match(regex)
 
-// 		if (expected) {
-// 			const output = extractRangeFromMatch(options, match)
+		if (expected) {
+			const output = extractRangeFromMatch(match)
 
-// 			t.equal(range.book, output.book)
-// 			t.deepEqual(range.start, output.start)
-// 			t.deepEqual(range.end, output.end)
-// 		} else {
-// 			t.equal(match, null, `No match found in ${text}`)
-// 		}
-// 	})
-// })
+			t.equal(output.book, range.book, `Find book name in '${text}'`)
+			t.deepEqual(output.start, range.start, `Find range start in '${text}'`)
+			t.deepEqual(output.end, range.end, `Find range end in '${text}'`)
+		} else {
+			t.equal(match, null, `No match found in ${text}`)
+		}
+	})
+})
 
