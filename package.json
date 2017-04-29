@@ -1,6 +1,6 @@
 {
   "name": "verse-reference-regex",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A regular expression that matches Bible verse references and ranges",
   "main": "index.js",
   "module": "index.es6.js",
