@@ -31,7 +31,7 @@
     "tape": "4.6.3"
   },
   "dependencies": {
-    "compose-regexp": "0.1.8",
+    "regex-fun": "1.0.0",
     "flatmap": "0.0.3"
   }
 }

@@ -1,15 +1,11 @@
 const flatmap = require('flatmap')
 const {
-    sequence,
+    combine,
     either,
     capture,
-    greedy,
+    optional,
     flags,
-} = require('compose-regexp')
-
-function optional(...args) {
-    return greedy('?', ...args)
-}
+} = require('regex-fun')
 
 const books = require('./books')
 
@@ -17,7 +13,6 @@ module.exports = function createRegex({
 	requireVerse = false,
 	flags: regexFlags = 'i',
 } = {}) {
-
 	const bookNames = books.map(({ name }) => name)
 	const abbreviations = flatmap(books, ({ aliases }) => {
 		return flatmap(aliases, alias => [ alias, alias + '.' ])
@@ -25,17 +20,19 @@ module.exports = function createRegex({
 
 	const number = /(\d+)/
 	const numberAndOptionalLetter = /(\d+)([a-z])?/
-	const colonVerse = sequence(':', numberAndOptionalLetter)
-	const chapterAndVerse = sequence(number, requireVerse ? colonVerse : optional(colonVerse))
+	const colonVerse = combine(':', numberAndOptionalLetter)
+	const chapterAndVerse = combine(number, requireVerse ? colonVerse : optional(colonVerse))
 
-	const range = sequence(chapterAndVerse, optional('-', either(/([a-z])/, /(\d+)([a-z])/, chapterAndVerse, numberAndOptionalLetter)))
+	const secondHalfOfRange = combine('-', either(/([a-z])/, /(\d+)([a-z])/, chapterAndVerse, numberAndOptionalLetter))
+	const range = combine(chapterAndVerse, optional(secondHalfOfRange))
 
-	return flags(regexFlags,
-		sequence(
+	return flags(
+		combine(
 			capture(either(...bookNames, ...abbreviations)),
 			' ',
 			range
-		)
+		),
+		regexFlags
 	)
 }
 
