@@ -1,5 +1,5 @@
+const books = require('books-of-the-bible')
 
-const books = require('./books')
 const mapOfAliasesToBookNames = books.reduce((map, book) => {
 	map[book.name.toLowerCase()] = book
 	book.aliases.forEach(alias => map[alias.toLowerCase()] = book)
@@ -7,7 +7,7 @@ const mapOfAliasesToBookNames = books.reduce((map, book) => {
 }, Object.create(null))
 
 module.exports = function extractRangeFromMatch(match) {
-	const [ matchText, matchBook, matchStartChapter, matchStartVerse, matchStartSection, ...matchTail ] = match
+	const [ , matchBook, matchStartChapter, matchStartVerse, matchStartSection, ...matchTail ] = match
 	const rangeEndValues = matchTail.filter(value => value !== undefined)
 
 	const start = {

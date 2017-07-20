@@ -7,7 +7,7 @@ const {
     flags,
 } = require('regex-fun')
 
-const books = require('./books')
+const books = require('books-of-the-bible')
 
 module.exports = function createRegex({
 	requireVerse = false,

@@ -31,7 +31,8 @@
     "tape": "4.6.3"
   },
   "dependencies": {
-    "regex-fun": "1.0.0",
-    "flatmap": "0.0.3"
+    "books-of-the-bible": "1.0.0",
+    "flatmap": "0.0.3",
+    "regex-fun": "1.0.0"
   }
 }

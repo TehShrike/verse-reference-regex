@@ -105,7 +105,7 @@ replaced // => `Tell me about Revelation c1v1s'null' to c1v4s'a' will you`
 
 # Book names
 
-Book aliases (including ones with trailing periods) will be matched and normalized.  You can find the list of normalized book names and their aliases in [books.js](./books.js).
+Book aliases (including ones with trailing periods) will be matched and normalized.  You can find the list of normalized book names and their aliases in the [books-of-the-bible](https://github.com/TehShrike/books-of-the-bible) repository.
 
 # Other
 
