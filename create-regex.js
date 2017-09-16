@@ -27,12 +27,10 @@ module.exports = function createRegex({
 	const range = combine(chapterAndVerse, optional(secondHalfOfRange))
 
 	return flags(
-		combine(
-			capture(either(...bookNames, ...abbreviations)),
-			' ',
-			range
-		),
-		regexFlags
+		regexFlags,
+		capture(either(...bookNames, ...abbreviations)),
+		' ',
+		range
 	)
 }
 
