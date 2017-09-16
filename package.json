@@ -31,7 +31,7 @@
     "tape": "4.6.3"
   },
   "dependencies": {
-    "~books-of-the-bible": "1.0.0",
+    "books-of-the-bible": "~1.0.0",
     "flatmap": "0.0.3",
     "regex-fun": "~2.0.2"
   }
