@@ -106,7 +106,7 @@ replaced // => `Tell me about Revelation c1v1s'null' to c1v4s'a' will you`
 
 # Book names
 
-Book aliases (including ones with trailing periods) will be matched and normalized.  You can find the list of normalized book names and their aliases in the [books-of-the-bible](https://github.com/TehShrike/books-of-the-bible) repository.
+Book aliases (including ones with trailing periods) will be matched and normalized.  You can find the default list of normalized book names and their aliases in the [books-of-the-bible](https://github.com/TehShrike/books-of-the-bible) repository.
 
 # Other
 
@@ -114,6 +114,6 @@ Chapter/verse numbers and ranges are not validated.
 
 If you find a verse range that you think should be matched but is not, add it to the list in [test.js](./test.js) and open a pull request.
 
-Any changes to the book aliases will be published as minor/feature version bumps.
+Any changes to the default book aliases will be published as minor/feature version bumps.
 
 Licensed [WTFPL](http://wtfpl2.com).
