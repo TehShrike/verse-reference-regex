@@ -1,12 +1,9 @@
-const books = require('books-of-the-bible')
+const canonBooks = require('books-of-the-bible')
 
-const mapOfAliasesToBookNames = books.reduce((map, book) => {
-	map[book.name.toLowerCase()] = book
-	book.aliases.forEach(alias => map[alias.toLowerCase()] = book)
-	return map
-}, Object.create(null))
+const mapOfAliasesToCanonBookNames = makeMapOfAliases(canonBooks)
 
-module.exports = function extractRangeFromMatch(match) {
+module.exports = function extractRangeFromMatch(match, books) {
+	const mapOfAliasesToBookNames = books ? makeMapOfAliases(books) : mapOfAliasesToCanonBookNames
 	const [ , matchBook, matchStartChapter, matchStartVerse, matchStartSection, ...matchTail ] = match
 	const rangeEndValues = matchTail.filter(value => value !== undefined)
 
@@ -103,4 +100,12 @@ function separateSectionFromNumbers(ary) {
 
 function isSection(str) {
 	return /[a-z]/.test(str)
+}
+
+function makeMapOfAliases(books) {
+	return books.reduce((map, book) => {
+		map[book.name.toLowerCase()] = book
+		book.aliases.forEach(alias => map[alias.toLowerCase()] = book)
+		return map
+	}, Object.create(null))
 }

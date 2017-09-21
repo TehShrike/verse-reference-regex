@@ -7,11 +7,12 @@ const {
     flags,
 } = require('regex-fun')
 
-const books = require('books-of-the-bible')
+const canonBooks = require('books-of-the-bible')
 
 module.exports = function createRegex({
 	requireVerse = false,
 	flags: regexFlags = 'i',
+	books = canonBooks,
 } = {}) {
 	const bookNames = books.map(({ name }) => name)
 	const abbreviations = flatmap(books, ({ aliases }) => {

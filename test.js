@@ -333,3 +333,23 @@ runAllTests('Capturing', ({ t, expectedToFindMatch, regex, cases }) => {
 	})
 })
 
+test('Allow passing in custom book data structures', t => {
+	const books = [
+		{ name: 'Bob', aliases: [] },
+	]
+	const regex = createRegex({ requireVerse: true, books })
+
+	const noMatchText = `something something Genesis 10:10 something`
+	t.notOk(noMatchText.match(regex))
+
+	const text = `Tell me more about Bob 17:3 wouldja?  Not  though`
+	const match = text.match(regex)
+	t.ok(match)
+
+	const output = extractRangeFromMatch(match, books)
+	t.equal(output.book, 'Bob')
+	t.deepEqual(output.start, { chapter: 17, verse: 3, section: null })
+	t.deepEqual(output.end, { chapter: 17, verse: 3, section: null })
+
+	t.end()
+})

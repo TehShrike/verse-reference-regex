@@ -7,7 +7,7 @@ Provides:
 
 # API
 
-## `createRegex({ requireVerse = false, flags = 'i' })`
+## `createRegex({ requireVerse = false, flags = 'i', books = canonBooks })`
 
 `createRegex` takes in a map of options and returns a regular expression.
 
@@ -15,8 +15,9 @@ Provides:
 
 - `requireVerse`: if true, will only match references with a verse.  If false, will match references and ranges with chapter numbers only, like `Genesis 1` or `Gen. 2-3`.  Defaults to `false`.
 - `flags`: flags to be used to create the [RegExp](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp).  If you want to use the regex to match more than one reference in a string, you'll probably want to pass in `'ig'`.  Defaults to `'i'`.
+- `books`: an array of books with their aliases.  Defaults to [books-of-the-bible](https://github.com/TehShrike/books-of-the-bible).
 
-## `extractRangeFromMatch(match)`
+## `extractRangeFromMatch(match, books = canonBooks)`
 
 Given a result array, like the ones returned by [`exec`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec) or [`match`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match), it will return an object that looks like this:
 
