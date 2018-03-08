@@ -2,7 +2,23 @@ const canonBooks = require('books-of-the-bible')
 
 const mapOfAliasesToCanonBookNames = makeMapOfAliases(canonBooks)
 
-module.exports = function extractRangeFromMatch(match, books) {
+const valueOr = (value, defaultValue) => value === undefined
+	? evaluate(defaultValue)
+	: value
+const ifelse = (predicate, truthyCase, falsyCase) => evaluate(predicate)
+	? evaluate(truthyCase)
+	: evaluate(falsyCase)
+
+const valueOrNull = value => valueOr(value, null)
+const evaluate = value => typeof value === 'function' ? value() : value
+const int = value => value === null ? value : parseInt(value, 10)
+const stripPeriod = str => str[str.length - 1] === '.' ? str.substr(0, str.length - 1) : str
+const isSection = str => /[a-z]/.test(str)
+
+
+module.exports = extractRangeFromMatch
+
+function extractRangeFromMatch(match, books) {
 	const mapOfAliasesToBookNames = books ? makeMapOfAliases(books) : mapOfAliasesToCanonBookNames
 	const [ , matchBook, matchStartChapter, matchStartVerse, matchStartSection, ...matchTail ] = match
 	const rangeEndValues = matchTail.filter(value => value !== undefined)
@@ -10,7 +26,7 @@ module.exports = function extractRangeFromMatch(match, books) {
 	const start = {
 		chapter: int(valueOrNull(matchStartChapter)),
 		verse: int(valueOrNull(matchStartVerse)),
-		section: valueOrNull(matchStartSection)
+		section: valueOrNull(matchStartSection),
 	}
 
 	const end = ifelse(rangeEndValues.length === 3, () => {
@@ -18,7 +34,7 @@ module.exports = function extractRangeFromMatch(match, books) {
 		return {
 			chapter: int(chapter),
 			verse: int(verse),
-			section: valueOrNull(section)
+			section: valueOrNull(section),
 		}
 	}, () => {
 		const { numbers, section } = separateSectionFromNumbers(rangeEndValues)
@@ -28,7 +44,7 @@ module.exports = function extractRangeFromMatch(match, books) {
 			return {
 				chapter,
 				verse,
-				section
+				section,
 			}
 		} else if (numbers.length === 1) {
 			const rangeIsChapter = start.verse === null
@@ -36,11 +52,11 @@ module.exports = function extractRangeFromMatch(match, books) {
 			return rangeIsChapter ? {
 				chapter: numbers[0],
 				verse: null,
-				section
+				section,
 			} : {
 				chapter: start.chapter,
 				verse: numbers[0],
-				section
+				section,
 			}
 		} else {
 			return {
@@ -54,33 +70,22 @@ module.exports = function extractRangeFromMatch(match, books) {
 	return {
 		book: mapOfAliasesToBookNames[stripPeriod(matchBook).toLowerCase()].name,
 		start,
-		end
+		end,
 	}
 }
 
-function valueOrNull(value) {
-	return valueOr(value, null)
+module.exports.chapterVerseRange = match => {
+	const [ , ...rest ] = match
+	const books = [{
+		name: '',
+		aliases: [],
+	}]
+	return Object.assign(
+		extractRangeFromMatch([ null, '', ...rest ], books),
+		{ book: null }
+	)
 }
 
-function valueOr(value, defaultValue) {
-	return value === undefined ? evaluate(defaultValue) : value
-}
-
-function evaluate(value) {
-	return typeof value === 'function' ? value() : value
-}
-
-function int(value) {
-	return value === null ? value : parseInt(value, 10)
-}
-
-function stripPeriod(str) {
-	return str[str.length - 1] === '.' ? str.substr(0, str.length - 1) : str
-}
-
-function ifelse(predicate, truthyCase, falsyCase) {
-	return evaluate(predicate) ? evaluate(truthyCase) : evaluate(falsyCase)
-}
 
 function separateSectionFromNumbers(ary) {
 	const lastValue = ary[ary.length - 1]
@@ -88,18 +93,14 @@ function separateSectionFromNumbers(ary) {
 	if (ary.length > 0 && isSection(lastValue)) {
 		return {
 			numbers: ary.slice(0, ary.length - 1).map(int),
-			section: lastValue
+			section: lastValue,
 		}
 	} else {
 		return {
 			numbers: ary.map(int),
-			section: null
+			section: null,
 		}
 	}
-}
-
-function isSection(str) {
-	return /[a-z]/.test(str)
 }
 
 function makeMapOfAliases(books) {

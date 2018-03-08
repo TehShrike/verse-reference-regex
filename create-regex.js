@@ -1,13 +1,13 @@
 const flatmap = require('flatmap')
 const {
-    combine,
-    either,
-    capture,
-    optional,
-    flags,
+	either,
+	capture,
+	flags,
 } = require('regex-fun')
 
 const canonBooks = require('books-of-the-bible')
+
+const chapterVerseRange = require('./create-chapter-verse-range-regex.js')
 
 module.exports = function createRegex({
 	requireVerse = false,
@@ -19,13 +19,7 @@ module.exports = function createRegex({
 		return flatmap(aliases, alias => [ alias, alias + '.' ])
 	})
 
-	const number = /(\d+)/
-	const numberAndOptionalLetter = /(\d+)([a-z])?/
-	const colonVerse = combine(':', numberAndOptionalLetter)
-	const chapterAndVerse = combine(number, requireVerse ? colonVerse : optional(colonVerse))
-
-	const secondHalfOfRange = combine('-', either(/([a-z])/, /(\d+)([a-z])/, chapterAndVerse, numberAndOptionalLetter))
-	const range = combine(chapterAndVerse, optional(secondHalfOfRange))
+	const range = chapterVerseRange({ requireVerse, flags: regexFlags })
 
 	return flags(
 		regexFlags,

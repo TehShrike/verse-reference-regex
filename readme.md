@@ -7,6 +7,26 @@ Provides:
 
 # API
 
+```
+const {
+	createRegex,
+	extractRangeFromMatch,
+	createChapterVerseRangeRegex
+} = require('verse-reference-regex')
+
+// or, ESM
+import {
+	createRegex,
+	extractRangeFromMatch,
+	createChapterVerseRangeRegex
+} from 'verse-reference-regex'
+```
+
+<!-- js
+const { createRegex, extractRangeFromMatch, createChapterVerseRangeRegex } = require('./')
+-->
+
+
 ## `createRegex({ requireVerse = false, flags = 'i', books = canonBooks })`
 
 `createRegex` takes in a map of options and returns a regular expression.
@@ -37,11 +57,27 @@ Given a result array, like the ones returned by [`exec`](https://developer.mozil
 }
 ```
 
-# Examples
-<!-- js
-const { createRegex, extractRangeFromMatch } = require('./')
--->
+## `createChapterVerseRangeRegex({ requireVerse = false, flags = 'i' })`
 
+Matches only the chapter/verse range portion of a reference.
+
+Use `extractRangeFromMatch.extractRangeFromMatch(match)` to read the values out of the match object.
+
+```js
+const chapterVerseRegex = createChapterVerseRangeRegex()
+
+const chapterVerseMatch = `Tell me about 12:30-14:1a y'all`.match(chapterVerseRegex)
+
+const output = extractRangeFromMatch.chapterVerseRange(chapterVerseMatch)
+const expected = {
+	book: null,
+	start: { chapter: 12, verse: 30, section: null },
+	end: { chapter: 14, verse: 1, section: 'a' }
+}
+output // => expected
+```
+
+# Examples
 Setup for the examples:
 
 ```js
