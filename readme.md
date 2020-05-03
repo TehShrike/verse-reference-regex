@@ -61,7 +61,7 @@ Given a result array, like the ones returned by [`exec`](https://developer.mozil
 
 Matches only the chapter/verse range portion of a reference.
 
-Use `extractRangeFromMatch.extractRangeFromMatch(match)` to read the values out of the match object.
+Use `extractRangeFromMatch.chapterVerseRange(match)` to read the values out of the match object.
 
 ```js
 const chapterVerseRegex = createChapterVerseRangeRegex()
