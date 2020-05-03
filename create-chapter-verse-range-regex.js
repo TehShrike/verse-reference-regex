@@ -14,7 +14,7 @@ module.exports = function createChapterVerseRangeRegex({
 	const colonVerse = combine(':', numberAndOptionalLetter)
 	const chapterAndVerse = combine(number, requireVerse ? colonVerse : optional(colonVerse))
 
-	const secondHalfOfRange = combine('-', either(/([a-z])/, /(\d+)([a-z])/, chapterAndVerse, numberAndOptionalLetter))
+	const secondHalfOfRange = combine('-', either(/([a-z])/, chapterAndVerse, numberAndOptionalLetter))
 
 	return flags(regexFlags, chapterAndVerse, optional(secondHalfOfRange))
 }
